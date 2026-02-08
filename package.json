@@ -1,0 +1,19 @@
+{
+  "name": "sportnews",
+  "version": "1.0.0",
+  "description": "Trang web tin tức SEO-optimized với Node.js + Express + EJS",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "node-cache": "^5.1.2",
+    "node-fetch": "^2.7.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

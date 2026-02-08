@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags -->
+    <title>
+        <%= title %>
+    </title>
+    <meta name="description" content="<%= typeof description !== 'undefined' ? description : '' %>">
+    <% if (typeof canonical !=='undefined' ) { %>
+        <link rel="canonical" href="<%= canonical %>">
+        <% } %>
+
+            <!-- Open Graph / Facebook -->
+            <meta property="og:type" content="<%= typeof article !== 'undefined' ? 'article' : 'website' %>">
+            <% if (typeof canonical !=='undefined' ) { %>
+                <meta property="og:url" content="<%= canonical %>">
+                <% } %>
+                    <meta property="og:title" content="<%= title %>">
+                    <meta property="og:description"
+                        content="<%= typeof description !== 'undefined' ? description : '' %>">
+                    <% if (typeof article !=='undefined' && article && article.avatarLink) { %>
+                        <meta property="og:image" content="<%= article.avatarLink %>">
+                        <% } %>
+                            <meta property="og:site_name" content="<%= siteConfig.siteName %>">
+
+                            <!-- Twitter Card -->
+                            <meta name="twitter:card" content="summary_large_image">
+                            <meta name="twitter:title" content="<%= title %>">
+                            <meta name="twitter:description"
+                                content="<%= typeof description !== 'undefined' ? description : '' %>">
+                            <% if (typeof article !=='undefined' && article && article.avatarLink) { %>
+                                <meta name="twitter:image" content="<%= article.avatarLink %>">
+                                <% } %>
+
+                                    <!-- Preconnect to external domains for faster loading -->
+                                    <link rel="preconnect" href="https://file.lifenews247.com">
+                                    <link rel="preconnect" href="https://fonts.googleapis.com">
+                                    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                                    <link rel="preconnect" href="https://pagead2.googlesyndication.com">
+                                    <link rel="preconnect" href="https://googleads.g.doubleclick.net">
+
+                                    <!-- Google Fonts - Inter -->
+                                    <link
+                                        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+                                        rel="stylesheet">
+
+                                    <!-- Main CSS -->
+                                    <link rel="stylesheet" href="/css/main.css">
+
+                                    <!-- Favicon -->
+                                    <link rel="icon" type="image/png" href="/images/favicon.png">
+
+                                    <!-- Ad Scripts - Load in head -->
+                                    <% if (siteConfig.headerScripts) { %>
+                                        <%- siteConfig.headerScripts %>
+                                            <% } %>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <a href="/" class="logo">
+                <span class="logo-text">
+                    <span class="logo-main">
+                        <%= siteConfig.siteName %>
+                    </span>
+                    <span class="logo-tagline">News & Magazine</span>
+                </span>
+            </a>
+            <nav class="main-nav">
+                <a href="/">Home</a>
+                <a href="/page/contact">Contact</a>
+                <a href="/page/terms">Terms</a>
+                <a href="/page/privacy">Privacy</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <%- body %>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="/page/contact">Contact Us</a>
+                <a href="/page/terms">Terms & Conditions</a>
+                <a href="/page/privacy">Privacy Policy</a>
+            </div>
+            <p class="copyright">
+                © <%= new Date().getFullYear() %>
+                    <%= siteConfig.siteName %>. All rights reserved.
+            </p>
+        </div>
+    </footer>
+</body>
+
+</html>

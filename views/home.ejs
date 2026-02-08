@@ -1,0 +1,98 @@
+<% if (newsGroups && newsGroups.length> 0) { %>
+    <% var allArticles=[]; newsGroups.forEach(function(group) { if (group.detail && group.detail.length> 0) {
+        group.detail.forEach(function(article) {
+        allArticles.push(article);
+        });
+        }
+        });
+
+        for (var i = allArticles.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = allArticles[i];
+        allArticles[i] = allArticles[j];
+        allArticles[j] = temp;
+        }
+
+        var mainFeatured = allArticles[0];
+        var sideFeatured = allArticles.slice(1, 5);
+        %>
+
+        <div class="home-container">
+            <section class="hero-banner">
+                <div class="hero-grid-5">
+                    <% if (mainFeatured) { %>
+                        <article class="hero-main">
+                            <a
+                                href="/<%= mainFeatured.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').substring(0, 50) %>-<%= mainFeatured.id %>">
+                                <div class="hero-image-wrap">
+                                    <img src="<%= mainFeatured.avatarLink %>"
+                                        alt="<%= mainFeatured.name.substring(0, 100) %>">
+                                </div>
+                            </a>
+                        </article>
+                        <% } %>
+
+                            <div class="hero-side-grid">
+                                <% sideFeatured.forEach(function(article) { %>
+                                    <article class="hero-side-item">
+                                        <a
+                                            href="/<%= article.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').substring(0, 50) %>-<%= article.id %>">
+                                            <div class="hero-image-wrap">
+                                                <img src="<%= article.avatarLink %>"
+                                                    alt="<%= article.name.substring(0, 80) %>" loading="lazy">
+                                            </div>
+                                            <div class="hero-caption">
+                                                <span>
+                                                    <%= article.name.length> 50 ? article.name.substring(0, 50) + '...'
+                                                        : article.name %>
+                                                </span>
+                                            </div>
+                                        </a>
+                                    </article>
+                                    <% }); %>
+                            </div>
+                </div>
+            </section>
+
+            <% newsGroups.forEach(function(group) { %>
+                <section class="news-section">
+                    <header class="section-header">
+                        <h2 class="section-title">📰 <%= group.groupName %>
+                        </h2>
+                    </header>
+                    <div class="news-grid">
+                        <% if (group.detail && group.detail.length> 0) { %>
+                            <% group.detail.forEach(function(article) { %>
+                                <article class="news-card">
+                                    <a
+                                        href="/<%= article.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').substring(0, 50) %>-<%= article.id %>">
+                                        <div class="news-card-img">
+                                            <img src="<%= article.avatarLink %>"
+                                                alt="<%= article.name.substring(0, 100) %>" loading="lazy">
+                                        </div>
+                                        <div class="news-card-body">
+                                            <h3>
+                                                <%= article.name.length> 80 ? article.name.substring(0, 80) + '...' :
+                                                    article.name %>
+                                            </h3>
+                                            <time datetime="<%= article.dateTimeStart %>">
+                                                <%= new Date(article.dateTimeStart).toLocaleDateString('en-US',
+                                                    {month: 'short' , day: 'numeric' , year: 'numeric' }) %>
+                                            </time>
+                                        </div>
+                                    </a>
+                                </article>
+                                <% }); %>
+                                    <% } %>
+                    </div>
+                </section>
+                <% }); %>
+        </div>
+
+        <% } else { %>
+            <div class="home-container">
+                <div class="no-content">
+                    <p>No articles available. Please check back later.</p>
+                </div>
+            </div>
+            <% } %>

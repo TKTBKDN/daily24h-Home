@@ -1,0 +1,191 @@
+<!-- Schema.org NewsArticle Markup -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    "headline": "<%- article.name.replace(/"/g, '\\"') %>",
+    "image": ["<%= article.avatarLink %>"],
+    "datePublished": "<%= article.dateTimeStart %>",
+    "dateModified": "<%= article.dateTimeStart %>",
+    "author": {
+        "@type": "Organization",
+        "name": "<%= siteConfig.siteName %>"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "<%= siteConfig.siteName %>",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://<%= currentHost %>/images/logo.png"
+        }
+    },
+    "description": "<%- (article.summary || article.name.substring(0, 160)).replace(/"/g, '\\"') %>"
+}
+</script>
+
+<article class="article-page">
+    <div class="container">
+
+        <!-- Ad: Before Title -->
+        <%- siteConfig.ads.beforeTitle %>
+
+            <!-- Article Header -->
+            <header class="article-header">
+                <h1 class="article-page-title">
+                    <%= article.name %>
+                </h1>
+                <div class="article-meta">
+                    <time class="article-date" datetime="<%= article.dateTimeStart %>">
+                        <%= new Date(article.dateTimeStart).toLocaleDateString('en-US', { year: 'numeric' ,
+                            month: 'long' , day: 'numeric' , hour: '2-digit' , minute: '2-digit' }) %>
+                    </time>
+                </div>
+            </header>
+
+            <!-- Ad: After Title -->
+            <%- siteConfig.ads.afterTitle %>
+
+                <!-- Featured Image -->
+                <% if (article.avatarLink) { %>
+                    <figure class="article-featured-image">
+                        <img src="<%= article.avatarLink %>" alt="<%= article.name.substring(0, 100) %>"
+                            class="featured-img">
+                    </figure>
+                    <% } %>
+
+                        <!-- Article Summary -->
+                        <% if (article.summary) { %>
+                            <div class="article-summary">
+                                <p>
+                                    <%= article.summary %>
+                                </p>
+                            </div>
+                            <% } %>
+
+                                <!-- Article Content (includes mid-content ads) -->
+                                <div class="article-body">
+                                    <%- article.content %>
+                                </div>
+
+                                <!-- ============================================ -->
+                                <!-- BÀI VIẾT THỨ 2 (NẾU CÓ) -->
+                                <!-- ============================================ -->
+                                <% if (hasSecondArticle && secondArticle) { %>
+                                    <div class="second-article-wrapper">
+
+                                        <!-- Nút Continue -->
+                                        <button class="btn-continue" id="btnContinue" onclick="toggleSecondArticle()">
+                                            <span class="btn-continue-text">Continue Reading</span>
+                                            <svg class="btn-continue-icon" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2">
+                                                <polyline points="6,9 12,15 18,9"></polyline>
+                                            </svg>
+                                        </button>
+
+                                        <!-- Quảng cáo cuối bài (hiện SAU nút Continue khi chưa bấm) -->
+                                        <div id="adEndContentBefore">
+                                            <%- siteConfig.ads.endContent %>
+                                        </div>
+
+                                        <!-- Bài viết thứ 2 (ẩn mặc định) -->
+                                        <div class="second-article" id="secondArticle" style="display: none;">
+
+                                            <div class="second-article-divider"></div>
+
+                                            <!-- Header bài viết 2 -->
+                                            <header class="article-header second-article-header">
+                                                <h2 class="article-page-title second-title">
+                                                    <%= secondArticle.name %>
+                                                </h2>
+                                                <div class="article-meta">
+                                                    <time class="article-date"
+                                                        datetime="<%= secondArticle.dateTimeStart %>">
+                                                        <%= new
+                                                            Date(secondArticle.dateTimeStart).toLocaleDateString('en-US',
+                                                            { year: 'numeric' , month: 'long' , day: 'numeric' ,
+                                                            hour: '2-digit' , minute: '2-digit' }) %>
+                                                    </time>
+                                                </div>
+                                            </header>
+
+                                            <!-- Featured Image bài viết 2 -->
+                                            <% if (secondArticle.avatarLink) { %>
+                                                <figure class="article-featured-image">
+                                                    <img src="<%= secondArticle.avatarLink %>"
+                                                        alt="<%= secondArticle.name.substring(0, 100) %>"
+                                                        class="featured-img" loading="lazy">
+                                                </figure>
+                                                <% } %>
+
+                                                    <!-- Nội dung bài viết 2 -->
+                                                    <div class="article-body">
+                                                        <%- secondArticle.content %>
+                                                    </div>
+
+                                                    <!-- Quảng cáo cuối bài (di chuyển xuống đây khi bấm Continue) -->
+                                                    <div id="adEndContentAfter"></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Script toggle bài viết 2 -->
+                                    <script>
+                                        function toggleSecondArticle() {
+                                            var secondArticle = document.getElementById('secondArticle');
+                                            var btnContinue = document.getElementById('btnContinue');
+                                            var btnText = btnContinue.querySelector('.btn-continue-text');
+                                            var btnIcon = btnContinue.querySelector('.btn-continue-icon');
+                                            var adBefore = document.getElementById('adEndContentBefore');
+                                            var adAfter = document.getElementById('adEndContentAfter');
+
+                                            if (secondArticle.style.display === 'none') {
+                                                // Mở bài viết 2
+                                                secondArticle.style.display = 'block';
+                                                btnText.textContent = 'Hide Article';
+                                                btnIcon.style.transform = 'rotate(180deg)';
+
+                                                // Di chuyển quảng cáo xuống cuối bài 2
+                                                if (adBefore && adAfter) {
+                                                    adAfter.innerHTML = adBefore.innerHTML;
+                                                    adBefore.style.display = 'none';
+                                                }
+
+                                                setTimeout(function () {
+                                                    secondArticle.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                                }, 100);
+                                            } else {
+                                                // Ẩn bài viết 2
+                                                secondArticle.style.display = 'none';
+                                                btnText.textContent = 'Continue Reading';
+                                                btnIcon.style.transform = 'rotate(0deg)';
+
+                                                // Di chuyển quảng cáo về sau nút Continue
+                                                if (adBefore && adAfter) {
+                                                    adBefore.style.display = 'block';
+                                                    adAfter.innerHTML = '';
+                                                }
+                                            }
+                                        }
+                                    </script>
+
+                                    <% } else { %>
+                                        <!-- Nếu KHÔNG có bài viết 2, hiển thị quảng cáo cuối bài ở đây -->
+                                        <%- siteConfig.ads.endContent %>
+                                            <% } %>
+
+                                                <!-- Share Buttons -->
+                                                <div class="share-buttons">
+                                                    <span class="share-label">Share:</span>
+                                                    <a href="https://www.facebook.com/sharer/sharer.php?u=<%= encodeURIComponent(canonical) %>"
+                                                        target="_blank" rel="noopener noreferrer"
+                                                        class="share-btn share-facebook">
+                                                        Facebook
+                                                    </a>
+                                                    <a href="https://twitter.com/intent/tweet?url=<%= encodeURIComponent(canonical) %>&text=<%= encodeURIComponent(article.name) %>"
+                                                        target="_blank" rel="noopener noreferrer"
+                                                        class="share-btn share-twitter">
+                                                        Twitter
+                                                    </a>
+                                                </div>
+
+    </div>
+</article>
