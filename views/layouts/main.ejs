@@ -7,7 +7,7 @@
 
     <!-- SEO Meta Tags -->
     <title>
-        <%= title %>
+        <%= typeof article !=='undefined' && article && article.userCode ? title + ' - ' + article.userCode : title %>
     </title>
     <meta name="description" content="<%= typeof description !== 'undefined' ? description : '' %>">
     <% if (typeof canonical !=='undefined' ) { %>
