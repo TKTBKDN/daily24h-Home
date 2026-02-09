@@ -19,7 +19,8 @@
             <% if (typeof canonical !=='undefined' ) { %>
                 <meta property="og:url" content="<%= canonical %>">
                 <% } %>
-                    <meta property="og:title" content="<%= title %>">
+                    <meta property="og:title"
+                        content="<%= typeof article !== 'undefined' && article && article.userCode ? title + ' - ' + article.userCode : title %>">
                     <meta property="og:description"
                         content="<%= typeof description !== 'undefined' ? description : '' %>">
                     <% if (typeof article !=='undefined' && article && article.avatarLink) { %>
