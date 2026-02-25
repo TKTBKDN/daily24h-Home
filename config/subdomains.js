@@ -251,6 +251,62 @@ const SUBDOMAIN_CONFIGS = {
         displayAdsScript: 'news_daily24_blog.8a499c6d-2a86-4eb5-8fa4-ece5e0490866',
     },
 
+    // rapus.daily24.blog
+    'rapus.daily24.blog': {
+        siteName: 'Rapus Daily',
+        googleTagId: 'G-28D67R3Z7M',
+        googleClientId: '7472198107183412',
+        googleClientSlotId: '6320984157',
+        googleAdSlot: '3735522729',
+        adsKeeperSrc: '1077877',
+        mgWidgetId: '1945825',
+        mgWidgetFeedId: '1945824',
+        videoAdsScript: 'rapus_daily24_blog.f5bf71ae-78ec-4909-934a-23ab3391027b',
+        displayAdsScript: 'rapus_daily24_blog.770b683b-4e0e-46b9-8914-f43db02ba074',
+    },
+
+    // nflnews.daily24.blog
+    'nflnews.daily24.blog': {
+        siteName: 'NFL News Daily',
+        googleTagId: 'G-8KMEF08FKY',
+        googleClientId: '7472198107183412',
+        googleClientSlotId: '1284619200',
+        googleAdSlot: '5738095451',
+        adsKeeperSrc: '1077878',
+        mgWidgetId: '1951969',
+        mgWidgetFeedId: '1951968',
+        videoAdsScript: 'nflnews_daily24_blog.adc6f4cc-fd6b-4bc4-9060-65b2e4a7ecd0',
+        displayAdsScript: 'nflnews_daily24_blog.8a499c6d-2a86-4eb5-8fa4-ece5e0490866',
+    },
+
+    // rapus.daily24.blog
+    'rapus.daily24.blog': {
+        siteName: 'Rapus Daily News',
+        googleTagId: 'G-69Z6BJ0D6Q',
+        googleClientId: '7472198107183412',
+        googleClientSlotId: '7161516433',
+        googleAdSlot: '4619113578',
+        adsKeeperSrc: '1082274',
+        mgWidgetId: '1963617',
+        mgWidgetFeedId: '1963616',
+        videoAdsScript: 'rapus_daily24_blog.ace08cf6-9aa0-4226-a9d3-6ebaba3f4b76',
+        displayAdsScript: 'rapus_daily24_blog.0118bea8-63a2-4d21-8342-1b2381a74a69',
+    },
+
+    // nflnews.daily24.blog
+    'nflnews.daily24.blog': {
+        siteName: 'NFL News Daily',
+        googleTagId: 'G-J5DGVXB1TH',
+        googleClientId: '7472198107183412',
+        googleClientSlotId: '8139556188',
+        googleAdSlot: '6826474519',
+        adsKeeperSrc: '1082273',
+        mgWidgetId: '1963619',
+        mgWidgetFeedId: '1963618',
+        videoAdsScript: 'nflnews_daily24_blog.6bd1a048-0cb7-4b9b-b8cc-10031a5e895a',
+        displayAdsScript: 'nflnews_daily24_blog.2b07d6c7-adb2-40c3-bfb6-00c22a2962e9',
+    },
+
     // Subdomain chính
     'homesport.hotnewsus24h.com': {
         siteName: 'NewsEdge',
